@@ -71,7 +71,6 @@ function getCoinPriceRequest() {
 }
 
 function getCoinPriceSuccess(payload) {
-  console.log('success!', payload)
   return { type: types.REQUEST_COIN_PRICE_SUCCESS, payload }
 }
 
@@ -84,10 +83,10 @@ const initialState = {
   loading: false,
   error: null,
   id: '',
-  name: 'Ethereum',
-  symbol: 'ETH',
+  name: '',
+  symbol: '',
   price: '',
-  imageSrc: '/media/20646/eth_logo.png',
+  imageSrc: '',
 }
 export default (state = initialState, { type, payload }) => {
   switch(type) {
