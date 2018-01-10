@@ -20,7 +20,7 @@ export default class CoinList extends Component {
   }
 
   render() {
-    const { coins, loading } = this.props
+    const { coins, loading, error } = this.props
     return (
       <div style={styles.container}>
         <ul style={styles.list}>
@@ -32,11 +32,20 @@ export default class CoinList extends Component {
               </div>
             )
           }
-          {!loading && coins.slice(0, 10).map(({ CoinName, ImageUrl, Symbol, Id }) => {
-            return (
-              <CoinListItem key={Id} id={Id} name={CoinName} symbol={Symbol} imageSrc={ImageUrl} />
+          {
+            !loading && !error && coins.slice(0, 50).map(({ CoinName, ImageUrl, Symbol, Id }) => {
+              return (
+                <CoinListItem key={Id} id={Id} name={CoinName} symbol={Symbol} imageSrc={ImageUrl} />
+              )
+            })
+          }
+          {
+            !loading && error && (
+              <div>
+                <h3>Unfortunately, there was an error :(</h3>
+              </div>
             )
-          })}
+          }
         </ul>
       </div>
     )

@@ -36,6 +36,9 @@ function getCoinSnapShot(id) {
             symbol: data.Symbol,
             imageSrc: data.ImageUrl
           }
+          if (response.Response === 'Error') {
+            return dispatch(getCoinSnapShotFailure(response.Message))
+          }
           return dispatch(getCoinSnapShotSuccess(payload))
         },
         error => dispatch(getCoinSnapShotFailure(error))
@@ -52,7 +55,7 @@ function getCoinSnapShotSuccess(payload) {
 }
 
 function getCoinSnapShotFailure(payload) {
-  return { type: types.REQUEST_COIN_SNAPSHOT_FAILURE, error: payload }
+  return { type: types.REQUEST_COIN_SNAPSHOT_FAILURE, payload }
 }
 
 function getCoinPrice(symbol) {
@@ -60,7 +63,12 @@ function getCoinPrice(symbol) {
     dispatch(getCoinPriceRequest())
     return priceApi.getCoinPrice(symbol, 'USD')
       .then(
-        response => dispatch(getCoinPriceSuccess(response.USD)),
+        response => {
+          if (response.Response === 'Error') {
+            return dispatch(getCoinPriceFailure(response.Message))
+          }
+          return dispatch(getCoinPriceSuccess(response.USD))
+        },
         error => dispatch(getCoinPriceFailure(error))
       )
   }
@@ -92,14 +100,14 @@ export default (state = initialState, { type, payload }) => {
   switch(type) {
     case types.REQUEST_COIN_PRICE:
     case types.REQUEST_COIN_SNAPSHOT:
-      return { ...state, loading: true }
+      return { ...state, loading: true, error: null }
     case types.REQUEST_COIN_SNAPSHOT_SUCCESS:
       const { name, symbol, imageSrc } = payload
-      return { ...state, name, symbol, imageSrc }
+      return { ...state, name, symbol, imageSrc, error: null }
     case types.REQUEST_COIN_SNAPSHOT_FAILURE:
-      return { ...state, error: payload, loading: false }
+      return { ...state, loading: false, error: payload }
     case types.REQUEST_COIN_PRICE_SUCCESS:
-      return { ...state, loading: false, price: payload }
+      return { ...state, loading: false, price: payload, error: null }
     case types.REQUEST_COIN_PRICE_FAILURE:
       return { ...state, loading: false, error: payload }
     default:

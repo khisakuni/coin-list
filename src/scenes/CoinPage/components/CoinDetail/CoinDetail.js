@@ -35,7 +35,7 @@ export default class CoinDetail extends Component {
   }
 
   render() {
-    const { name, symbol, imageSrc, price, loading } = this.props
+    const { name, symbol, imageSrc, price, loading, error } = this.props
     return (
       <div>
         <div style={style.linkContainer}>
@@ -51,7 +51,7 @@ export default class CoinDetail extends Component {
             )
           }
           {
-            !loading && (
+            !loading && !error && (
               <div>
                 <div className="grid-x">
                   <div className="medium-12 cell">
@@ -68,6 +68,13 @@ export default class CoinDetail extends Component {
                     <h1>${price}</h1>
                   </div>
                 </div>
+              </div>
+            )
+          }
+          {
+            !loading && error && (
+              <div>
+                <h3>Unfortunately, there was an error :(</h3>
               </div>
             )
           }
