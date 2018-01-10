@@ -19,7 +19,7 @@ class App extends Component {
         <Router>
           <div className="grid-container">
             <Route exact path="/" component={Home} />
-            <Route path="/:symbol" component={CoinPage} />
+            <Route path="/:id/:symbol" component={CoinPage} />
           </div>
         </Router>
       </Provider>

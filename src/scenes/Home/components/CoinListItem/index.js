@@ -15,7 +15,7 @@ class CoinListItem extends Component {
     const { name, imageSrc, symbol, id } = this.props
     return (
       <li style={styles.container}>
-        <Link to={`/${id}`} className="grid-x">
+        <Link to={`/${id}/${symbol}`} className="grid-x">
           <div className="medium-3 cell">
             <img src={`https://www.cryptocompare.com${imageSrc}`} style={styles.image} alt={name}/>
           </div>

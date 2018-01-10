@@ -7,6 +7,7 @@ const mapStateToProps = state => state.selectedCoin
 
 const mapDispatchToProps = {
   getCoinSnapshot: actionCreators.getCoinSnapShot,
+  getCoinPrice: actionCreators.getCoinPrice,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinDetail)
