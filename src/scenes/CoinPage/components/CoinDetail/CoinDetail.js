@@ -17,6 +17,9 @@ const style = {
   h3: {
     display: 'inline',
   },
+  nameHeader: {
+    color: '#373737',
+  },
   symbolHeader: {
     color: '#c7c7c7',
   }
@@ -57,7 +60,7 @@ export default class CoinDetail extends Component {
                 </div>
                 <div className="grid-x">
                   <div className="medium-12 cell">
-                    <h3 style={style.h2}>{name}</h3> &nbsp; <h3 style={{...style.h3, ...style.symbolHeader }}>({symbol})</h3>
+                    <h3 style={{ ...style.h2, ...style.nameHeader }}>{name}</h3> &nbsp; <h3 style={{...style.h3, ...style.symbolHeader }}>({symbol})</h3>
                   </div>
                 </div>
                 <div className="grid-x">
