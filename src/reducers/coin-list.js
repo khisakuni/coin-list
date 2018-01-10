@@ -18,7 +18,7 @@ function getCoinList() {
     dispatch(getCoinListRequest())
     return api.getCoinList()
       .then(
-        response => dispatch(getCoinListSuccess(response.Data)),
+        response => dispatch(getCoinListSuccess(Object.values(response.Data))),
         error => dispatch(getCoinListFailure(error))
       )
   }
@@ -40,14 +40,14 @@ function getCoinListFailure(payload) {
 const initialState = {
   loading: false,
   error: null,
-  data: []
+  coins: []
 }
 export default (state = initialState, { type, payload }) => {
   switch(type) {
     case types.REQUEST_COIN_LIST:
       return { ...state, loading: true }
     case types.REQUEST_COIN_LIST_SUCCESS:
-      return { ...state, loading: false, data: payload }
+      return { ...state, loading: false, coins: payload }
     case types.REQUEST_COIN_LIST_FAILURE:
       return { ...state, loading: false, error: payload }
     default:

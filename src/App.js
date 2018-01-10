@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom'
 import Home from './scenes/Home'
+import CoinPage from './scenes/CoinPage'
 import configureStore from './store'
 
 const store = process.env.NODE_ENV === 'development' ?
@@ -16,8 +17,9 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">
+          <div className="grid-container">
             <Route exact path="/" component={Home} />
+            <Route path="/:symbol" component={CoinPage} />
           </div>
         </Router>
       </Provider>
